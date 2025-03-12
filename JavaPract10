@@ -1,0 +1,85 @@
+package javapract10;
+import java.util.*;
+
+public class JavaPract10 {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String Fname;
+        int ID;
+        double salary, increaseSalary1;
+        
+        System.out.println("Please enter your full name: ");
+        Fname = scan.nextLine();
+        
+        while (true) {
+            System.out.println("Please enter your ID: ");
+            if (scan.hasNextInt()) {
+                ID = scan.nextInt();
+                break;
+            }
+            else {
+                System.out.println("Invalid ID number");
+                scan.nextLine();
+            }
+        }
+        
+        while (true) {
+            System.out.println("Please enter your salary: ");
+            if (scan.hasNextDouble()) {
+                salary = scan.nextDouble();
+                break;
+            }
+            else {
+                System.out.println("Please enter your ID");
+                scan.nextLine();
+            }
+        }
+        
+        displayDetails employee = new displayDetails(Fname, ID, salary);
+        
+        System.out.print("Enter percentage to increase salary: ");
+        increaseSalary1 = scan.nextDouble();
+        employee.increaseSalary(increaseSalary1);
+
+        // Display Updated Details
+        employee.display();
+        scan.close();
+    }
+}
+
+//Increase salary Method
+class displayDetails {
+    private double salary;
+    private String Fname;
+    private int ID;
+    
+    public displayDetails(String Fname, int ID, double salary){
+        this.Fname = Fname;
+        this.ID = ID;
+        this.salary = salary;
+    }
+    
+    // Getter and setter for balance
+    public double getSalary() {
+        return salary;
+    }
+    public void setSalary(double Salary) {
+        this.salary = Salary;
+    }
+    public void increaseSalary(double percent) {
+        if (percent > 0) {
+            salary += salary * (percent / 100);
+            System.out.println("Salary increased by " + percent + "%");
+        } else {
+            System.out.println("Invalid increase percentage!");
+        }
+    }  
+    
+    // Display details
+    public void display() {
+        System.out.println("\n--- Employee Details ---");
+        System.out.println("Full Name: " + Fname);
+        System.out.println("Employee ID: " + ID);
+        System.out.println("Updated Salary: RM " + salary);
+    }
+}
